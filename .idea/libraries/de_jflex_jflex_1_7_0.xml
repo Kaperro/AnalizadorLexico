@@ -9,7 +9,10 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/jflex-1.7.0-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/jflex/jflex/1.7.0/jflex-1.7.0-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/jflex/cup_runtime/11b/cup_runtime-11b-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant/1.9.7/ant-1.9.7-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.9.7/ant-launcher-1.9.7-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

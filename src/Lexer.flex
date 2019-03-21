@@ -25,21 +25,23 @@ class Yytoken {
     public int columna;
     //Metodo que devuelve los datos necesarios que escribiremos en un archive de salida
     public String toString() {
-        return "Token #"+numToken+": "+token+" C.Lexico: "+tipo+" ["+linea
+        return "Token #"+numToken+": "+token+" Tipo: "+tipo+" ["+linea
         + "," +columna + "]";
     }
 }
 
 %%
+
 %function nextToken
 %public
 %class AnalizadoLexico
 %unicode
+%char
 %{
 	private int contador;
 	private ArrayList<Yytoken> tokens;
 	private void writeOutputFile() throws IOException{
-	String filename = 'file.out';
+	String filename = "C:/Users/erck_/IdeaProjects/Lexico/src/file.out";
 	BufferedWriter out = new BufferedWriter(
 		new FileWriter(filename));
 	System.out.println("\n ***Tokens Guardados en archivo ** \n");
@@ -65,6 +67,7 @@ class Yytoken {
 
 %eof}
 
+
 %line
 %column
 
@@ -79,66 +82,66 @@ SALTO = \n|\r|\r\n
 %%
 {NUMERO} {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"num",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"num",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 
 "int" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"entero",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"entero",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 "float" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"flotante",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"flotante",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 
 {IDENTIFICADOR} {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"id",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"id",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 
 "+=" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"asigna_suma",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"asigna_suma",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 
 "+" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"suma",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"suma",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 
 "=" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"asignacion",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"asignacion",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 "-" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"resta",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"resta",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 "*" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"multiplicacion",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"multiplicacion",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
 "/" {
 	contador++;
-	Yytoken t = new Yytoken(contador.yytext(),"division",yyline,yycolumn);
+	Yytoken t = new Yytoken(contador,yytext(),"division",yyline,yycolumn);
 	tokens.add(t);
 	return t;
 }
@@ -149,3 +152,4 @@ SALTO = \n|\r|\r\n
 	tokens.add(t);
 	return t;
 }
+[^]                    { throw new Error("Illegal character <"+yytext()+">"); }
